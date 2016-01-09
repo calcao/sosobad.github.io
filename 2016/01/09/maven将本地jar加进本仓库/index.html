@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="javascript," />
+  <meta name="keywords" content="java," />
 
 
 
@@ -51,16 +51,19 @@
 
 
 
-<meta name="description" content="123456789var obj = &amp;#123;id:1,name:&apos;tome&apos;,sex:&apos;man&apos;&amp;#125;;var properties = Object.getOwnPropertyNames(obj)console.log(properties);-----------------------------[&apos;id&apos;,&apos;name&apos;,&apos;sex&apos;]">
+<meta name="description" content="在项目中有时需要添加第三方jar到maven项目中，这时就可以使用mvn命令将jar添加到本地库中。
+12345678 mvn install:install-file-Dfile=&amp;lt;path-to-file&amp;gt;-DgroupId=&amp;lt;group-id&amp;gt;-DartifactId=&amp;lt;artifact-id&amp;gt;-Dversion=&amp;lt;version&amp;gt;-Dpack">
 <meta property="og:type" content="article">
-<meta property="og:title" content="javascript中获取对象所有属性">
-<meta property="og:url" content="http://sosobad.github.io/2015/12/31/javascript中获取对象所有属性/index.html">
+<meta property="og:title" content="maven将本地jar加进本仓库">
+<meta property="og:url" content="http://sosobad.github.io/2016/01/09/maven将本地jar加进本仓库/index.html">
 <meta property="og:site_name" content="sosobad">
-<meta property="og:description" content="123456789var obj = &amp;#123;id:1,name:&apos;tome&apos;,sex:&apos;man&apos;&amp;#125;;var properties = Object.getOwnPropertyNames(obj)console.log(properties);-----------------------------[&apos;id&apos;,&apos;name&apos;,&apos;sex&apos;]">
-<meta property="og:updated_time" content="2015-12-31T08:45:46.404Z">
+<meta property="og:description" content="在项目中有时需要添加第三方jar到maven项目中，这时就可以使用mvn命令将jar添加到本地库中。
+12345678 mvn install:install-file-Dfile=&amp;lt;path-to-file&amp;gt;-DgroupId=&amp;lt;group-id&amp;gt;-DartifactId=&amp;lt;artifact-id&amp;gt;-Dversion=&amp;lt;version&amp;gt;-Dpack">
+<meta property="og:updated_time" content="2016-01-09T03:01:05.552Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="javascript中获取对象所有属性">
-<meta name="twitter:description" content="123456789var obj = &amp;#123;id:1,name:&apos;tome&apos;,sex:&apos;man&apos;&amp;#125;;var properties = Object.getOwnPropertyNames(obj)console.log(properties);-----------------------------[&apos;id&apos;,&apos;name&apos;,&apos;sex&apos;]">
+<meta name="twitter:title" content="maven将本地jar加进本仓库">
+<meta name="twitter:description" content="在项目中有时需要添加第三方jar到maven项目中，这时就可以使用mvn命令将jar添加到本地库中。
+12345678 mvn install:install-file-Dfile=&amp;lt;path-to-file&amp;gt;-DgroupId=&amp;lt;group-id&amp;gt;-DartifactId=&amp;lt;artifact-id&amp;gt;-Dversion=&amp;lt;version&amp;gt;-Dpack">
 
 
 
@@ -72,7 +75,7 @@
   };
 </script>
 
-  <title> javascript中获取对象所有属性 | sosobad </title>
+  <title> maven将本地jar加进本仓库 | sosobad </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -192,7 +195,7 @@
             
             
               
-                javascript中获取对象所有属性
+                maven将本地jar加进本仓库
               
             
           </h1>
@@ -201,8 +204,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-31T16:42:34+08:00" content="2015-12-31">
-              2015-12-31
+            <time itemprop="dateCreated" datetime="2016-01-09T10:48:46+08:00" content="2016-01-09">
+              2016-01-09
             </time>
           </span>
 
@@ -225,7 +228,10 @@
       
 
       
-        <span itemprop="articleBody"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;id:<span class="number">1</span>,name:<span class="string">'tome'</span>,sex:<span class="string">'man'</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> properties = <span class="built_in">Object</span>.getOwnPropertyNames(obj)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(properties);</span><br><span class="line"></span><br><span class="line">-----------------------------</span><br><span class="line">[<span class="string">'id'</span>,<span class="string">'name'</span>,<span class="string">'sex'</span>]</span><br></pre></td></tr></table></figure></span>
+        <span itemprop="articleBody"><p>在项目中有时需要添加第三方jar到maven项目中，这时就可以使用mvn命令将jar添加到本地库中。</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> mvn install:install-file</span><br><span class="line">-<span class="ruby"><span class="constant">Dfile</span>=&lt;path-to-file&gt;</span><br><span class="line"></span>-<span class="ruby"><span class="constant">DgroupId</span>=&lt;group-id&gt;</span><br><span class="line"></span>-<span class="ruby"><span class="constant">DartifactId</span>=&lt;artifact-id&gt;</span><br><span class="line"></span>-<span class="ruby"><span class="constant">Dversion</span>=&lt;version&gt;</span><br><span class="line"></span>-<span class="ruby"><span class="constant">Dpackaging</span>=&lt;packaging&gt;</span><br><span class="line"></span>-<span class="ruby"><span class="constant">DgeneratePom</span>=<span class="keyword">true</span></span></span><br></pre></td></tr></table></figure>
+<p>在你的项目pom.xml中添加依赖<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span> group-id<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>artifact-id<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">version</span>&gt;</span>version<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+</span>
       
     </div>
 
@@ -233,7 +239,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/javascript/" rel="tag">#javascript</a>
+            <a href="/tags/java/" rel="tag">#java</a>
           
         </div>
       
@@ -242,17 +248,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/20/使用java-util-Timer创建定时任务/" rel="next" title="使用java.util.Timer创建定时任务">
-                <i class="fa fa-chevron-left"></i> 使用java.util.Timer创建定时任务
+              <a href="/2015/12/31/javascript中获取对象所有属性/" rel="next" title="javascript中获取对象所有属性">
+                <i class="fa fa-chevron-left"></i> javascript中获取对象所有属性
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/01/09/maven将本地jar加进本仓库/" rel="prev" title="maven将本地jar加进本仓库">
-                maven将本地jar加进本仓库 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
