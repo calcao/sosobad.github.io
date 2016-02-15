@@ -209,6 +209,91 @@
             
               
                 
+                <a class="post-title-link" href="/2016/02/15/关于IE中自动缓存AJAX请求在Angularjs中的处理方法/" itemprop="url">
+                  关于IE中自动缓存AJAX请求在Angularjs中的处理方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-02-15T10:06:40+08:00" content="2016-02-15">
+              2016-02-15
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>IE在默认情况下,会对AJAX请求做缓存处理，相同地址的重复请求，只有一次会到达服务端。然后这种机制是我们不需要的。特别是html应用。   </p>
+<p>##解决方法   </p>
+<p>###在URL添加参数后缀<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="string">'http://localhost:8080/test?v='</span>+<span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</span><br></pre></td></tr></table></figure></p>
+<p>###服务端添加header<br>在服务端加 header(“Cache-Control: no-cache, must-revalidate”);    </p>
+<p>###AngularJs关于RestAngular中处理方式<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//  注册组件</span></span><br><span class="line">   <span class="keyword">var</span> mainApp = angular.module(<span class="string">'MainApp'</span>)</span><br><span class="line">       .config([<span class="string">'RestangularProvider'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">RestangularProvider</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">             <span class="comment">// RestangularProvider.setDefaultHeaders(&#123;'If-Modified-Since': 'Mon, 26 Jul 1997 05:00:00 GMT'&#125;);</span></span><br><span class="line">             RestangularProvider.setDefaultHeaders(&#123;<span class="string">'Cache-Control'</span>: <span class="string">'no-cache'</span>&#125;);</span><br><span class="line">             RestangularProvider.setDefaultHeaders(&#123;<span class="string">'Pragma'</span>: <span class="string">'no-cache'</span>&#125;);</span><br><span class="line"></span><br><span class="line">             toastyConfigProvider.setConfig(&#123;</span><br><span class="line">                   showClose: <span class="literal">true</span>,</span><br><span class="line">                   clickToClose: <span class="literal">false</span>,</span><br><span class="line">                   timeout: <span class="number">10000</span>,</span><br><span class="line">                   sound: <span class="literal">true</span>,</span><br><span class="line">                   html: <span class="literal">false</span>,</span><br><span class="line">                   shake: <span class="literal">false</span>,</span><br><span class="line">                   theme: <span class="string">"default"</span></span><br><span class="line">               &#125;);</span><br><span class="line"></span><br><span class="line">       &#125;]);</span><br></pre></td></tr></table></figure></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/01/27/AngularJs常用插件/" itemprop="url">
                   AngularJs常用插件
                 </a>
@@ -828,7 +913,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
