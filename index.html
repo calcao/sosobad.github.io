@@ -252,12 +252,9 @@
 <li><p>Import the public key used by the package management system.   </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:<span class="number">80</span> --recv EA312927</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Create a /etc/apt/sources.list.d/mongodb-enterprise.list file for MongoDB.<br>根据ubuntu版本选择<br>Ubuntu 12.04:      </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"deb http://repo.mongodb.com/apt/ubuntu precise/mongodb-enterprise/stable multiverse"</span> | sudo tee /etc/apt/sources.list.d/mongodb-enterprise.list</span><br></pre></td></tr></table></figure>
+<li><p>Create a /etc/apt/sources.list.d/mongodb-enterprise.list file for MongoDB.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#根据版本选择</span></span><br><span class="line"><span class="comment">#Ubuntu 12.04:</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"deb http://repo.mongodb.com/apt/ubuntu precise/mongodb-enterprise/stable multiverse"</span> | sudo tee /etc/apt/sources.list.d/mongodb-enterprise.list</span><br><span class="line"><span class="comment">#Ubuntu 14.04:</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"deb http://repo.mongodb.com/apt/ubuntu trusty/mongodb-enterprise/stable multiverse"</span> | sudo tee /etc/apt/sources.list.d/mongodb-enterprise.list</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<p>Ubuntu 14.04:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"deb http://repo.mongodb.com/apt/ubuntu trusty/mongodb-enterprise/stable multiverse"</span> | sudo tee /etc/apt/sources.list.d/mongodb-enterprise.list</span><br></pre></td></tr></table></figure></p>
-<ul>
 <li><p>Reload local package database.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
 </li>
