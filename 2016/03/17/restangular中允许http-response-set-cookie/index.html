@@ -51,22 +51,16 @@
 
 
 
-<meta name="description" content="IE在默认情况下,会对AJAX请求做缓存处理，相同地址的重复请求，只有一次会到达服务端。然后这种机制是我们不需要的。特别是html应用。   
-解决方法在URL添加参数后缀1var url = &apos;http://localhost:8080/test?v=&apos;+new Date().getTime();
-服务端添加header在服务端加 header(“Cache-Control: no-cache,">
+<meta name="description" content="123456var app = angular.module(&apos;app&apos;).config([&apos;RestangularProvider&apos;,function(RestangularProvider)&amp;#123;    RestangularProvider.setDefaultHttpFields(&amp;#123;        withCredentials: true    &amp;#125;);&amp;#125">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于IE中自动缓存AJAX请求在Angularjs中的处理方法">
-<meta property="og:url" content="http://sosobad.github.io/2016/02/15/关于IE中自动缓存AJAX请求在Angularjs中的RestAngular处理方法/index.html">
+<meta property="og:title" content="restangular允许http response set cookie">
+<meta property="og:url" content="http://sosobad.github.io/2016/03/17/restangular中允许http-response-set-cookie/index.html">
 <meta property="og:site_name" content="sosobad">
-<meta property="og:description" content="IE在默认情况下,会对AJAX请求做缓存处理，相同地址的重复请求，只有一次会到达服务端。然后这种机制是我们不需要的。特别是html应用。   
-解决方法在URL添加参数后缀1var url = &apos;http://localhost:8080/test?v=&apos;+new Date().getTime();
-服务端添加header在服务端加 header(“Cache-Control: no-cache,">
-<meta property="og:updated_time" content="2016-02-15T02:27:04.624Z">
+<meta property="og:description" content="123456var app = angular.module(&apos;app&apos;).config([&apos;RestangularProvider&apos;,function(RestangularProvider)&amp;#123;    RestangularProvider.setDefaultHttpFields(&amp;#123;        withCredentials: true    &amp;#125;);&amp;#125">
+<meta property="og:updated_time" content="2016-03-17T07:27:37.460Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于IE中自动缓存AJAX请求在Angularjs中的处理方法">
-<meta name="twitter:description" content="IE在默认情况下,会对AJAX请求做缓存处理，相同地址的重复请求，只有一次会到达服务端。然后这种机制是我们不需要的。特别是html应用。   
-解决方法在URL添加参数后缀1var url = &apos;http://localhost:8080/test?v=&apos;+new Date().getTime();
-服务端添加header在服务端加 header(“Cache-Control: no-cache,">
+<meta name="twitter:title" content="restangular允许http response set cookie">
+<meta name="twitter:description" content="123456var app = angular.module(&apos;app&apos;).config([&apos;RestangularProvider&apos;,function(RestangularProvider)&amp;#123;    RestangularProvider.setDefaultHttpFields(&amp;#123;        withCredentials: true    &amp;#125;);&amp;#125">
 
 
 
@@ -78,7 +72,7 @@
   };
 </script>
 
-  <title> 关于IE中自动缓存AJAX请求在Angularjs中的处理方法 | sosobad </title>
+  <title> restangular允许http response set cookie | sosobad </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -198,7 +192,7 @@
             
             
               
-                关于IE中自动缓存AJAX请求在Angularjs中的处理方法
+                restangular允许http response set cookie
               
             
           </h1>
@@ -207,8 +201,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-02-15T10:06:40+08:00" content="2016-02-15">
-              2016-02-15
+            <time itemprop="dateCreated" datetime="2016-03-17T15:23:56+08:00" content="2016-03-17">
+              2016-03-17
             </time>
           </span>
 
@@ -231,10 +225,7 @@
       
 
       
-        <span itemprop="articleBody"><p>IE在默认情况下,会对AJAX请求做缓存处理，相同地址的重复请求，只有一次会到达服务端。然后这种机制是我们不需要的。特别是html应用。   </p>
-<h2 id="u89E3_u51B3_u65B9_u6CD5"><a href="#u89E3_u51B3_u65B9_u6CD5" class="headerlink" title="解决方法"></a>解决方法</h2><h3 id="u5728URL_u6DFB_u52A0_u53C2_u6570_u540E_u7F00"><a href="#u5728URL_u6DFB_u52A0_u53C2_u6570_u540E_u7F00" class="headerlink" title="在URL添加参数后缀"></a>在URL添加参数后缀</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="string">'http://localhost:8080/test?v='</span>+<span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</span><br></pre></td></tr></table></figure>
-<h3 id="u670D_u52A1_u7AEF_u6DFB_u52A0header"><a href="#u670D_u52A1_u7AEF_u6DFB_u52A0header" class="headerlink" title="服务端添加header"></a>服务端添加header</h3><p>在服务端加 header(“Cache-Control: no-cache, must-revalidate”);    </p>
-<h3 id="AngularJs_u5173_u4E8ERestAngular_u4E2D_u5904_u7406_u65B9_u5F0F"><a href="#AngularJs_u5173_u4E8ERestAngular_u4E2D_u5904_u7406_u65B9_u5F0F" class="headerlink" title="AngularJs关于RestAngular中处理方式"></a>AngularJs关于RestAngular中处理方式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//  注册组件</span></span><br><span class="line">   <span class="keyword">var</span> mainApp = angular.module(<span class="string">'MainApp'</span>)</span><br><span class="line">       .config([<span class="string">'RestangularProvider'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">RestangularProvider</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">             <span class="comment">// RestangularProvider.setDefaultHeaders(&#123;'If-Modified-Since': 'Mon, 26 Jul 1997 05:00:00 GMT'&#125;);</span></span><br><span class="line">             RestangularProvider.setDefaultHeaders(&#123;<span class="string">'Cache-Control'</span>: <span class="string">'no-cache'</span>&#125;);</span><br><span class="line">             RestangularProvider.setDefaultHeaders(&#123;<span class="string">'Pragma'</span>: <span class="string">'no-cache'</span>&#125;);</span><br><span class="line"></span><br><span class="line">       &#125;]);</span><br></pre></td></tr></table></figure></span>
+        <span itemprop="articleBody"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'app'</span>)</span><br><span class="line">.config([<span class="string">'RestangularProvider'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">RestangularProvider</span>)</span>&#123;</span><br><span class="line">    RestangularProvider.setDefaultHttpFields(&#123;</span><br><span class="line">        withCredentials: <span class="literal">true</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;])</span><br></pre></td></tr></table></figure></span>
       
     </div>
 
@@ -251,17 +242,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/15/关于IE中自动缓存AJAX请求在Angularjs中的处理方法/" rel="next" title="关于IE中自动缓存AJAX请求在Angularjs中的处理方法">
-                <i class="fa fa-chevron-left"></i> 关于IE中自动缓存AJAX请求在Angularjs中的处理方法
+              <a href="/2016/03/17/angularjs-ui-route添加外部链接路由/" rel="next" title="angularjs ui-route添加外部链接路由">
+                <i class="fa fa-chevron-left"></i> angularjs ui-route添加外部链接路由
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/17/mongoDB安装-启用客户端认证/" rel="prev" title="mongoDB安装,启用客户端认证">
-                mongoDB安装,启用客户端认证 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -375,7 +362,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u89E3_u51B3_u65B9_u6CD5"><span class="nav-number">1.</span> <span class="nav-text">解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u5728URL_u6DFB_u52A0_u53C2_u6570_u540E_u7F00"><span class="nav-number">1.1.</span> <span class="nav-text">在URL添加参数后缀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u670D_u52A1_u7AEF_u6DFB_u52A0header"><span class="nav-number">1.2.</span> <span class="nav-text">服务端添加header</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AngularJs_u5173_u4E8ERestAngular_u4E2D_u5904_u7406_u65B9_u5F0F"><span class="nav-number">1.3.</span> <span class="nav-text">AngularJs关于RestAngular中处理方式</span></a></li></ol></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
