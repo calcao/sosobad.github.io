@@ -209,6 +209,207 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/17/mongoDB安装-启用客户端认证/" itemprop="url">
+                  mongoDB安装,启用客户端认证
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-03-17T13:27:19+08:00" content="2016-03-17">
+              2016-03-17
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>关于<a href="https://docs.mongodb.org/manual/" target="_blank" rel="external">mongoDB官网</a>有非常详细的文档   </p>
+<h4 id="ubuntu14-04"><a href="#ubuntu14-04" class="headerlink" title="ubuntu14.04"></a>ubuntu14.04</h4><h2 id="u5B89_u88C5"><a href="#u5B89_u88C5" class="headerlink" title="安装"></a>安装</h2><ul>
+<li><p>Import the public key used by the package management system.   </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:<span class="number">80</span> --recv EA312927</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Create a /etc/apt/sources.list.d/mongodb-enterprise.list file for MongoDB.<br>根据ubuntu版本选择<br>Ubuntu 12.04:      </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"deb http://repo.mongodb.com/apt/ubuntu precise/mongodb-enterprise/stable multiverse"</span> | sudo tee /etc/apt/sources.list.d/mongodb-enterprise.list</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Ubuntu 14.04:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"deb http://repo.mongodb.com/apt/ubuntu trusty/mongodb-enterprise/stable multiverse"</span> | sudo tee /etc/apt/sources.list.d/mongodb-enterprise.list</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>Reload local package database.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>install</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y mongodb-enterprise</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="u670D_u52A1_u8D77_u505C"><a href="#u670D_u52A1_u8D77_u505C" class="headerlink" title="服务起停"></a>服务起停</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#启动</span></span><br><span class="line">sudo service mongod start</span><br><span class="line"><span class="comment">#停止</span></span><br><span class="line">sudo service mongod stop</span><br><span class="line"><span class="comment">#重启</span></span><br><span class="line">sudo service mongod restart</span><br></pre></td></tr></table></figure>
+<h2 id="u542F_u7528_u5BA2_u6237_u7AEF_u9A8C_u8BC1"><a href="#u542F_u7528_u5BA2_u6237_u7AEF_u9A8C_u8BC1" class="headerlink" title="启用客户端验证"></a>启用客户端验证</h2><p>mongoDB安装好后默认是没有访问限制的，本地即可访问，但是开发中往往需要远程访问，因此需要开启客户端访问验证，即通过用户名密码远程连接mongoDB.<a href="https://docs.mongodb.org/manual/tutorial/enable-authentication/" target="_blank" rel="external">官方文档</a>中也非常详细.</p>
+<ul>
+<li><p>连接本地实例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#mongoDB默认端口为27017</span></span><br><span class="line">mongo --prot <span class="number">27017</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建管理员用户</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">use</span> <span class="tag">admin</span></span><br><span class="line"><span class="tag">db</span><span class="class">.createUser</span>(</span><br><span class="line">  <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">user</span>:<span class="value"> <span class="string">"root"</span>,</span><br><span class="line">    pwd: <span class="string">"root123"</span>,</span><br><span class="line">    roles: [ &#123; role: <span class="string">"userAdminAnyDatabase"</span>, db: <span class="string">"admin"</span> </span></span></span>&#125; ]</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改mongoDB配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/mongod.conf</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>添加<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">security</span>:</span><br><span class="line">  <span class="attribute">authorization</span>: enabled</span><br></pre></td></tr></table></figure></p>
+<p>修改bindIp为0.0.0.0</p>
+<ul>
+<li>重启mongoDB</li>
+<li>访问<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo xx<span class="class">.xx</span><span class="class">.xxx</span><span class="class">.xx</span>:<span class="number">27017</span>/admin -u root -<span class="tag">p</span> root123</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/15/关于IE中自动缓存AJAX请求在Angularjs中的处理方法/" itemprop="url">
+                  关于IE中自动缓存AJAX请求在Angularjs中的处理方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-02-15T10:06:40+08:00" content="2016-02-15">
+              2016-02-15
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>IE在默认情况下,会对AJAX请求做缓存处理，相同地址的重复请求，只有一次会到达服务端。然后这种机制是我们不需要的。特别是html应用。   </p>
+<h2 id="u89E3_u51B3_u65B9_u6CD5"><a href="#u89E3_u51B3_u65B9_u6CD5" class="headerlink" title="解决方法"></a>解决方法</h2><h3 id="u5728URL_u6DFB_u52A0_u53C2_u6570_u540E_u7F00"><a href="#u5728URL_u6DFB_u52A0_u53C2_u6570_u540E_u7F00" class="headerlink" title="在URL添加参数后缀"></a>在URL添加参数后缀</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="string">'http://localhost:8080/test?v='</span>+<span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</span><br></pre></td></tr></table></figure>
+<h3 id="u670D_u52A1_u7AEF_u6DFB_u52A0header"><a href="#u670D_u52A1_u7AEF_u6DFB_u52A0header" class="headerlink" title="服务端添加header"></a>服务端添加header</h3><p>在服务端加 header(“Cache-Control: no-cache, must-revalidate”);    </p>
+<h3 id="AngularJs_u5173_u4E8ERestAngular_u4E2D_u5904_u7406_u65B9_u5F0F"><a href="#AngularJs_u5173_u4E8ERestAngular_u4E2D_u5904_u7406_u65B9_u5F0F" class="headerlink" title="AngularJs关于RestAngular中处理方式"></a>AngularJs关于RestAngular中处理方式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//  注册组件</span></span><br><span class="line">   <span class="keyword">var</span> mainApp = angular.module(<span class="string">'MainApp'</span>)</span><br><span class="line">       .config([<span class="string">'RestangularProvider'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">RestangularProvider</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">             <span class="comment">// RestangularProvider.setDefaultHeaders(&#123;'If-Modified-Since': 'Mon, 26 Jul 1997 05:00:00 GMT'&#125;);</span></span><br><span class="line">             RestangularProvider.setDefaultHeaders(&#123;<span class="string">'Cache-Control'</span>: <span class="string">'no-cache'</span>&#125;);</span><br><span class="line">             RestangularProvider.setDefaultHeaders(&#123;<span class="string">'Pragma'</span>: <span class="string">'no-cache'</span>&#125;);</span><br><span class="line"></span><br><span class="line">       &#125;]);</span><br></pre></td></tr></table></figure>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/02/15/关于IE中自动缓存AJAX请求在Angularjs中的RestAngular处理方法/" itemprop="url">
                   关于IE中自动缓存AJAX请求在Angularjs中的处理方法
                 </a>
@@ -355,89 +556,6 @@
 </ul>
 </li>
 </ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/22/让电脑死机的js代码/" itemprop="url">
-                  让电脑死机的js代码
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-22T10:24:51+08:00" content="2016-01-22">
-              2016-01-22
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>这段代码会让cpu一路狂飙，浏览器卡死，电脑死机</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="actionscript"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> total=<span class="string">""</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">1000000</span>;i++)</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">total= total+i.toString();</span><br><span class="line"></span><br><span class="line">history.pushState(<span class="number">0</span>,<span class="number">0</span>,total);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>history.pushstate()是HTML5引入的API，pushState将指定的URL添加到浏览器历史里,存储当前历史记录点。 当 i&lt;100000 的时候会循环的将 total记录到浏览器历史里面，重复多了，浏览器就承受不住了   </p>
 
             
           </span>
@@ -911,7 +1029,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -925,7 +1043,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
