@@ -209,6 +209,88 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/31/Java程序shell启动脚本/" itemprop="url">
+                  Java程序shell启动脚本
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-03-31T15:14:36+08:00" content="2016-03-31">
+              2016-03-31
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#目录结构为</span></span><br><span class="line"><span class="preprocessor">#          bin</span></span><br><span class="line"><span class="preprocessor">#        /</span></span><br><span class="line"><span class="preprocessor">#project - configure</span></span><br><span class="line"><span class="preprocessor">#        \ </span></span><br><span class="line"><span class="preprocessor">#          lib</span></span><br></pre></td></tr></table></figure>
+<p>启动脚本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/sh</span></span><br><span class="line"><span class="comment">#---------------</span></span><br><span class="line"><span class="comment">#1)在windows下编写，在linux中可能无法执行,k可以尝试vi targetFile,然后:set fileformat=unix然后:x退出</span></span><br><span class="line"><span class="comment">#2)没有执行权限 chmod 755 xxx.sh  </span></span><br><span class="line"></span><br><span class="line"><span class="comment">#未设置系统变量需手动设置jdk路劲</span></span><br><span class="line"><span class="comment">#JAVA_HOME=</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#JVM启动参数   </span></span><br><span class="line">JAVA_OPTS=<span class="string">"-Xms56m -Xmx128m"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#当前文件路劲</span></span><br><span class="line">APP_HOME_BIN=$(<span class="built_in">cd</span> <span class="string">"<span class="variable">$(dirname "$0")</span>"</span>; <span class="built_in">pwd</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#程序名</span></span><br><span class="line">APP_NAME=<span class="string">"test"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#程序主目录</span></span><br><span class="line">APP_HOME=<span class="variable">$APP_HOME_BIN</span>/..</span><br><span class="line"></span><br><span class="line"><span class="comment">#Java主程序 main方法所在类</span></span><br><span class="line">APP_MAIN=com.xx.xx.xx.Test</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$APP_HOME</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#classpath参数 </span></span><br><span class="line"><span class="comment">#制定当前程序jar</span></span><br><span class="line">CLASSPATH=<span class="string">"<span class="variable">$APP_HOME_BIN</span>/xxx.jar"</span></span><br><span class="line"><span class="comment">#制定lib目录下所有依赖jar</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">test</span>Jar <span class="keyword">in</span> <span class="string">"<span class="variable">$APP_HOME</span>"</span>/lib/*.jar;  </span><br><span class="line"><span class="keyword">do</span>  </span><br><span class="line">   CLASSPATH=<span class="string">"<span class="variable">$CLASSPATH</span>"</span>:<span class="string">"<span class="variable">$testJar</span>"</span>  </span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#定义pid</span></span><br><span class="line"><span class="built_in">test</span>PID=<span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#同过java jps命令获取程序pid</span></span><br><span class="line"><span class="function"><span class="title">getTestPID</span></span>()&#123;  </span><br><span class="line">    javaps=`<span class="variable">$JAVA_HOME</span>/bin/jps <span class="operator">-l</span> | grep <span class="variable">$APP_MAIN</span>`  </span><br><span class="line">    <span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$javaps</span>"</span> ]; <span class="keyword">then</span>  </span><br><span class="line">        <span class="built_in">test</span>PID=`<span class="built_in">echo</span> <span class="variable">$javaps</span> | awk <span class="string">'&#123;print $1&#125;'</span>`  </span><br><span class="line">    <span class="keyword">else</span>  </span><br><span class="line">        <span class="built_in">test</span>PID=<span class="number">0</span>  </span><br><span class="line">    <span class="keyword">fi</span>  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#启动方法</span></span><br><span class="line"><span class="comment">#调用getTestPID方法给全局变量testPID赋值</span></span><br><span class="line"><span class="comment">#判断是否启动 如果pid 不等于0则已启动 -ne shell为不等于</span></span><br><span class="line"><span class="comment">#未启动则nohup启动java程序</span></span><br><span class="line"><span class="comment">#启动后调用getTestPID刷新全局变量testPID</span></span><br><span class="line"><span class="function"><span class="title">start</span></span>()&#123;  </span><br><span class="line"></span><br><span class="line">    getTestPID  </span><br><span class="line">    <span class="keyword">if</span> [ <span class="variable">$testPID</span> <span class="operator">-ne</span> <span class="number">0</span> ]; <span class="keyword">then</span>  </span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$APP_NAME</span> already started (PID=<span class="variable">$testPID</span>) "</span>  </span><br><span class="line">    <span class="keyword">else</span>  </span><br><span class="line">        <span class="built_in">echo</span> -n <span class="string">"Starting <span class="variable">$APP_NAME</span> "</span>  </span><br><span class="line">        nohup <span class="variable">$JAVA_HOME</span>/bin/java <span class="variable">$JAVA_OPTS</span> -classpath <span class="variable">$CLASSPATH</span> <span class="variable">$APP_MAIN</span> &amp;  </span><br><span class="line">        getTestPID  </span><br><span class="line">        <span class="keyword">if</span> [ <span class="variable">$testPID</span> <span class="operator">-ne</span> <span class="number">0</span> ]; <span class="keyword">then</span>  </span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"(PID=<span class="variable">$testPID</span>)...[Success]"</span>  </span><br><span class="line">        <span class="keyword">else</span>  </span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"[Failed]"</span>  </span><br><span class="line">        <span class="keyword">fi</span>  </span><br><span class="line">    <span class="keyword">fi</span>  </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#关闭方法</span></span><br><span class="line"><span class="comment">#通过testPID判断是否启动</span></span><br><span class="line"><span class="comment">#已启动则使用kill -9 命令关闭</span></span><br><span class="line"><span class="comment">#使用[$?]获取上一句命令的返回值,若其为0,表示程序已停止运行,则打印[Success],反之则打印[Failed] </span></span><br><span class="line"><span class="comment">#为防止Java程序被启动多次,这里增加了反复检查程序进程的功能,通过递归调用stop()函数的方式,反复kill  </span></span><br><span class="line"><span class="function"><span class="title">stop</span></span>()&#123;  </span><br><span class="line">    getTestPID  </span><br><span class="line">    <span class="keyword">if</span> [ <span class="variable">$testPID</span> <span class="operator">-ne</span> <span class="number">0</span> ]; <span class="keyword">then</span>  </span><br><span class="line">        <span class="built_in">echo</span> -n <span class="string">"Stopping <span class="variable">$APP_NAME</span>(PID=<span class="variable">$testPID</span>)..."</span>  </span><br><span class="line">        <span class="built_in">kill</span> -<span class="number">9</span> <span class="variable">$testPID</span>  </span><br><span class="line">        <span class="keyword">if</span> [ $? <span class="operator">-eq</span> <span class="number">0</span> ]; <span class="keyword">then</span>  </span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"[Success]"</span>  </span><br><span class="line">        <span class="keyword">else</span>  </span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"[Failed]"</span>  </span><br><span class="line">        <span class="keyword">fi</span>  </span><br><span class="line">        getTestPID  </span><br><span class="line">        <span class="keyword">if</span> [ <span class="variable">$testPID</span> <span class="operator">-ne</span> <span class="number">0</span> ]; <span class="keyword">then</span>  </span><br><span class="line">            stop  </span><br><span class="line">        <span class="keyword">fi</span>  </span><br><span class="line">    <span class="keyword">else</span>  </span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$APP_NAME</span> is not running"</span>  </span><br><span class="line">    <span class="keyword">fi</span>  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># $1 为执行脚本时的第一个参数</span></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">   <span class="string">'start'</span>)</span><br><span class="line">     start</span><br><span class="line">     ;;</span><br><span class="line">   <span class="string">'stop'</span>)</span><br><span class="line">     stop</span><br><span class="line">     ;;</span><br><span class="line">  *)</span><br><span class="line">     <span class="built_in">echo</span> <span class="string">"Usage: <span class="variable">$0</span> &#123;start|stop&#125;"</span></span><br><span class="line">     <span class="built_in">exit</span> <span class="number">1</span></span><br><span class="line">     ;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> <span class="number">0</span></span><br></pre></td></tr></table></figure></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/17/restangular中允许http-response-set-cookie/" itemprop="url">
                   restangular允许http response set cookie
                 </a>
@@ -488,89 +570,6 @@
               
                 
                 <a class="post-title-link" href="/2016/02/15/关于IE中自动缓存AJAX请求在Angularjs中的RestAngular处理方法/" itemprop="url">
-                  关于IE中自动缓存AJAX请求在Angularjs中的处理方法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-02-15T10:06:40+08:00" content="2016-02-15">
-              2016-02-15
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>IE在默认情况下,会对AJAX请求做缓存处理，相同地址的重复请求，只有一次会到达服务端。然后这种机制是我们不需要的。特别是html应用。   </p>
-<h2 id="u89E3_u51B3_u65B9_u6CD5"><a href="#u89E3_u51B3_u65B9_u6CD5" class="headerlink" title="解决方法"></a>解决方法</h2><h3 id="u5728URL_u6DFB_u52A0_u53C2_u6570_u540E_u7F00"><a href="#u5728URL_u6DFB_u52A0_u53C2_u6570_u540E_u7F00" class="headerlink" title="在URL添加参数后缀"></a>在URL添加参数后缀</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="string">'http://localhost:8080/test?v='</span>+<span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</span><br></pre></td></tr></table></figure>
-<h3 id="u670D_u52A1_u7AEF_u6DFB_u52A0header"><a href="#u670D_u52A1_u7AEF_u6DFB_u52A0header" class="headerlink" title="服务端添加header"></a>服务端添加header</h3><p>在服务端加 header(“Cache-Control: no-cache, must-revalidate”);    </p>
-<h3 id="AngularJs_u5173_u4E8ERestAngular_u4E2D_u5904_u7406_u65B9_u5F0F"><a href="#AngularJs_u5173_u4E8ERestAngular_u4E2D_u5904_u7406_u65B9_u5F0F" class="headerlink" title="AngularJs关于RestAngular中处理方式"></a>AngularJs关于RestAngular中处理方式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//  注册组件</span></span><br><span class="line">   <span class="keyword">var</span> mainApp = angular.module(<span class="string">'MainApp'</span>)</span><br><span class="line">       .config([<span class="string">'RestangularProvider'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">RestangularProvider</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">             <span class="comment">// RestangularProvider.setDefaultHeaders(&#123;'If-Modified-Since': 'Mon, 26 Jul 1997 05:00:00 GMT'&#125;);</span></span><br><span class="line">             RestangularProvider.setDefaultHeaders(&#123;<span class="string">'Cache-Control'</span>: <span class="string">'no-cache'</span>&#125;);</span><br><span class="line">             RestangularProvider.setDefaultHeaders(&#123;<span class="string">'Pragma'</span>: <span class="string">'no-cache'</span>&#125;);</span><br><span class="line"></span><br><span class="line">       &#125;]);</span><br></pre></td></tr></table></figure>
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/15/关于IE中自动缓存AJAX请求在Angularjs中的处理方法/" itemprop="url">
                   关于IE中自动缓存AJAX请求在Angularjs中的处理方法
                 </a>
               
