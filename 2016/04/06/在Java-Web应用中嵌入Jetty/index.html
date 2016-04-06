@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="javascript," />
+  <meta name="keywords" content="java," />
 
 
 
@@ -51,16 +51,16 @@
 
 
 
-<meta name="description" content="123456789var obj = &amp;#123;id:1,name:&apos;tome&apos;,sex:&apos;man&apos;&amp;#125;;var properties = Object.getOwnPropertyNames(obj)console.log(properties);-----------------------------[&apos;id&apos;,&apos;name&apos;,&apos;sex&apos;]">
+<meta name="description" content="pom.xml中添加jetty依赖1234567891011121314151617181920&amp;lt;dependency&amp;gt;        &amp;lt;groupId&amp;gt;org.eclipse.jetty&amp;lt;/groupId&amp;gt;        &amp;lt;artifactId&amp;gt;jetty-server&amp;lt;/artifactId&amp;gt;        &amp;lt;version&amp;g">
 <meta property="og:type" content="article">
-<meta property="og:title" content="javascript中获取对象所有属性">
-<meta property="og:url" content="http://sosobad.github.io/2015/12/31/javascript中获取对象所有属性/index.html">
+<meta property="og:title" content="在Java Web应用中嵌入Jetty">
+<meta property="og:url" content="http://sosobad.github.io/2016/04/06/在Java-Web应用中嵌入Jetty/index.html">
 <meta property="og:site_name" content="sosobad">
-<meta property="og:description" content="123456789var obj = &amp;#123;id:1,name:&apos;tome&apos;,sex:&apos;man&apos;&amp;#125;;var properties = Object.getOwnPropertyNames(obj)console.log(properties);-----------------------------[&apos;id&apos;,&apos;name&apos;,&apos;sex&apos;]">
-<meta property="og:updated_time" content="2015-12-31T08:45:46.404Z">
+<meta property="og:description" content="pom.xml中添加jetty依赖1234567891011121314151617181920&amp;lt;dependency&amp;gt;        &amp;lt;groupId&amp;gt;org.eclipse.jetty&amp;lt;/groupId&amp;gt;        &amp;lt;artifactId&amp;gt;jetty-server&amp;lt;/artifactId&amp;gt;        &amp;lt;version&amp;g">
+<meta property="og:updated_time" content="2016-04-06T08:17:44.912Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="javascript中获取对象所有属性">
-<meta name="twitter:description" content="123456789var obj = &amp;#123;id:1,name:&apos;tome&apos;,sex:&apos;man&apos;&amp;#125;;var properties = Object.getOwnPropertyNames(obj)console.log(properties);-----------------------------[&apos;id&apos;,&apos;name&apos;,&apos;sex&apos;]">
+<meta name="twitter:title" content="在Java Web应用中嵌入Jetty">
+<meta name="twitter:description" content="pom.xml中添加jetty依赖1234567891011121314151617181920&amp;lt;dependency&amp;gt;        &amp;lt;groupId&amp;gt;org.eclipse.jetty&amp;lt;/groupId&amp;gt;        &amp;lt;artifactId&amp;gt;jetty-server&amp;lt;/artifactId&amp;gt;        &amp;lt;version&amp;g">
 
 
 
@@ -72,7 +72,7 @@
   };
 </script>
 
-  <title> javascript中获取对象所有属性 | sosobad </title>
+  <title> 在Java Web应用中嵌入Jetty | sosobad </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -192,7 +192,7 @@
             
             
               
-                javascript中获取对象所有属性
+                在Java Web应用中嵌入Jetty
               
             
           </h1>
@@ -201,8 +201,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-31T16:42:34+08:00" content="2015-12-31">
-              2015-12-31
+            <time itemprop="dateCreated" datetime="2016-04-06T15:33:02+08:00" content="2016-04-06">
+              2016-04-06
             </time>
           </span>
 
@@ -225,7 +225,9 @@
       
 
       
-        <span itemprop="articleBody"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;id:<span class="number">1</span>,name:<span class="string">'tome'</span>,sex:<span class="string">'man'</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> properties = <span class="built_in">Object</span>.getOwnPropertyNames(obj)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(properties);</span><br><span class="line"></span><br><span class="line">-----------------------------</span><br><span class="line">[<span class="string">'id'</span>,<span class="string">'name'</span>,<span class="string">'sex'</span>]</span><br></pre></td></tr></table></figure></span>
+        <span itemprop="articleBody"><p>pom.xml中添加jetty依赖<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.eclipse.jetty<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>jetty-server<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">version</span>&gt;</span>9.2.11.v20150529<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.eclipse.jetty<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>jetty-servlet<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">version</span>&gt;</span>9.2.11.v20150529<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.eclipse.jetty<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>jetty-webapp<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">version</span>&gt;</span>9.2.11.v20150529<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.eclipse.jetty<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>jetty-jsp<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">version</span>&gt;</span>9.2.11.v20150529<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>启动类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PORT = <span class="number">8080</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CONTEXT = <span class="string">"/"</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_WEBAPP_PATH = <span class="string">"webapp"</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Server server = <span class="keyword">new</span> Server();</span><br><span class="line">    <span class="comment">//设置jvm退出是关闭</span></span><br><span class="line">    server.setStopAtShutdown(<span class="keyword">true</span>);</span><br><span class="line">    ServerConnector serverConnector = <span class="keyword">new</span> ServerConnector(server);</span><br><span class="line">    serverConnector.setPort(PORT);</span><br><span class="line">    <span class="comment">//Windows下重复启动Jetty不报告端口冲突的问题.</span></span><br><span class="line">    serverConnector.setReuseAddress(<span class="keyword">false</span>);</span><br><span class="line">    server.setConnectors(<span class="keyword">new</span> Connector[] &#123; serverConnector &#125;);</span><br><span class="line">    WebAppContext webAppContext = <span class="keyword">new</span> WebAppContext();</span><br><span class="line">    webAppContext.setContextPath(CONTEXT);</span><br><span class="line">    webAppContext.setDescriptor(<span class="string">"src/main/webapp/WEB-INF/web.xml"</span>);</span><br><span class="line">    webAppContext.setResourceBase(DEFAULT_WEBAPP_PATH);</span><br><span class="line">    server.setHandler(webAppContext);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      server.start();</span><br><span class="line">      server.join();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">      System.err.println(<span class="string">"server start failed"</span>);</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">      System.exit(-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</span>
       
     </div>
 
@@ -233,7 +235,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/javascript/" rel="tag">#javascript</a>
+            <a href="/tags/java/" rel="tag">#java</a>
           
         </div>
       
@@ -242,17 +244,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/20/使用java-util-Timer创建定时任务/" rel="next" title="使用java.util.Timer创建定时任务">
-                <i class="fa fa-chevron-left"></i> 使用java.util.Timer创建定时任务
+              <a href="/2016/03/31/Java程序shell启动脚本/" rel="next" title="Java程序shell启动脚本">
+                <i class="fa fa-chevron-left"></i> Java程序shell启动脚本
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/01/09/maven将本地jar加进本仓库/" rel="prev" title="maven将本地jar加进本仓库">
-                maven将本地jar加进本仓库 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
