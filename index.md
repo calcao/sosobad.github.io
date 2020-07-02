@@ -1,2 +1,2 @@
 # Java
-[HashMap原理](./html/java/HashMap原理.html)
+[HashMap原理](./md/java/HashMap原理.md)
