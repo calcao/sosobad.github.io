@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Java8中HashMap原理</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="java8中hashmap原理">Java8中HashMap原理</h1>
+<h2 id="jdk7和jdk8中hashmap的不同点">JDK7和JDK8中HashMap的不同点</h2>
+<ul>
+<li>JDK8中引入了新的数据结构红黑树</li>
+<li>JDK7中链表的插入使用头插法，扩容转移元素也是用的头插法，头插法速度更快，无需遍历链表，但是再多线程扩容的情况下使用头插法会出现循环链表问题，导致CPU飙升，JDK8中链表添加元素使用尾插法，JDK8中需要统计链表节点个数，所以要遍历链表，所以使用尾插法</li>
+<li>JDK7中的Hash算法比JDK8中更复杂，生成的hashcode也更散列，hashMap中的元素也更散列，而JDK8中引入了红黑树，查询性能得到保障，所以简化了Hash算法，毕竟算法越复杂越消耗CPU</li>
+<li>扩容的过程中，JDK7有可能会对Key进行rehash,重新hash与哈希种子有关，而JDK8中没有这部分逻辑</li>
+<li>JDK8中扩容条件与JDK7中不一样，除了要判断size是否大于阈值外，JDK7中海需要判断tab[i]是否为空，不为空才会扩容，而JDK8中没有该条件</li>
+<li>JDK8中多了一个API: putIfAbsent(key, value)</li>
+<li>JDK7和JDK8扩容中转移元素的逻辑不一样，JDK7是每次转移一个元素，JDK8是先算出来当前位置上哪些元素在新数组的低位上，哪些在新数组的高位上，再一次性转移</li>
+</ul>
+<h2 id="为什么使用红黑树">为什么使用红黑树</h2>
+<ul>
+<li>当元素隔宿小于某个阈值时，链表的插入查询效率要高于红黑树，当元素个数大于阈值时，链表的效率要低于红黑树</li>
+<li>AVL树插入效率低，因此选择插入效率较高的红黑树</li>
+<li>链表的查询的时间复杂度为O(n), 而红黑树的查询时间复杂度为O(logN)</li>
+</ul>
+<h2 id="什么时候会转化为红黑树">什么时候会转化为红黑树</h2>
+<p>当链表长度大于等于8时，并且数组长度大于等于64时才会转化为红黑树，当链表长度小于64时，通过扩容来减小hash冲突，缩短链表长度</p>
+<h2 id="源码解读">源码解读</h2>
+<h3 id="相关内部属性">相关内部属性</h3>
+<pre><code class="language-java"><div><span class="hljs-comment">//  默认容量位16 2^4</span>
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">4</span>; 
+
+<span class="hljs-comment">//  最大容量 2^30</span>
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MAXIMUM_CAPACITY = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">30</span>
+
+<span class="hljs-comment">//  默认负载因子 </span>
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="hljs-number">0.75f</span>;
+
+<span class="hljs-comment">// 树化阈值</span>
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> TREEIFY_THRESHOLD = <span class="hljs-number">8</span>;
+
+<span class="hljs-comment">// 由红黑树退化位链表阈值</span>
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> UNTREEIFY_THRESHOLD = <span class="hljs-number">6</span>;
+
+<span class="hljs-comment">// 链表树化Node数组需要达到的最小容量</span>
+<span class="hljs-comment">// 当数组小于64时，会通过扩容来解决冲突</span>
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MIN_TREEIFY_CAPACITY = <span class="hljs-number">64</span>;
+
+<span class="hljs-comment">//  Node继承自Map.Entry内部类，存放</span>
+<span class="hljs-keyword">transient</span> Node&lt;K,V&gt;[] table;
+
+<span class="hljs-comment">// 保存keySet()和values()的迭代器</span>
+<span class="hljs-keyword">transient</span> Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;
+
+<span class="hljs-comment">// 记录元素个数</span>
+<span class="hljs-keyword">transient</span> <span class="hljs-keyword">int</span> size;
+
+<span class="hljs-comment">// 记录当前集合的修改次数，添加删除都会影响</span>
+<span class="hljs-keyword">transient</span> <span class="hljs-keyword">int</span> modCount;
+
+<span class="hljs-comment">// 下次扩容的阈值</span>
+<span class="hljs-comment">// threshold = capacity * loadfacor</span>
+<span class="hljs-keyword">int</span> threshold;
+
+<span class="hljs-comment">// 负载因子</span>
+<span class="hljs-keyword">final</span> <span class="hljs-keyword">float</span> loadFactor;
+</div></code></pre>
+<h3 id="添加元素过程">添加元素过程</h3>
+<pre><code class="language-java"><div><span class="hljs-function"><span class="hljs-keyword">final</span> V <span class="hljs-title">putVal</span><span class="hljs-params">(<span class="hljs-keyword">int</span> hash, K key, V value, <span class="hljs-keyword">boolean</span> onlyIfAbsent,
+                   <span class="hljs-keyword">boolean</span> evict)</span> </span>{
+        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; <span class="hljs-keyword">int</span> n, i;
+        <span class="hljs-comment">// 【1】 检查table数组是否初始化</span>
+        <span class="hljs-keyword">if</span> ((tab = table) == <span class="hljs-keyword">null</span> || (n = tab.length) == <span class="hljs-number">0</span>)
+            <span class="hljs-comment">// resize方法同时承担初始化和扩容功能</span>
+            n = (tab = resize()).length;
+        <span class="hljs-comment">// 【2】 根据hash值定位数组下标，并判断数组位置是否为空</span>
+        <span class="hljs-keyword">if</span> ((p = tab[i = (n - <span class="hljs-number">1</span>) &amp; hash]) == <span class="hljs-keyword">null</span>)
+            <span class="hljs-comment">// 如果为空则直接在该位置新建一个node, 添加操作结束</span>
+            tab[i] = newNode(hash, key, value, <span class="hljs-keyword">null</span>);
+        <span class="hljs-keyword">else</span> {
+            <span class="hljs-comment">// 如果该位置不为空，则需要做进一步判断</span>
+            Node&lt;K,V&gt; e; K k;
+            <span class="hljs-comment">// 【3】 无论链表还是红黑树，先判断第一个节点Key与需要添加的key是否一致</span>
+            <span class="hljs-comment">//       如果一致则需要添加的元素就是该数组位置第一个元素，到【6】覆盖old vlaue</span>
+            <span class="hljs-keyword">if</span> (p.hash == hash &amp;&amp;
+                ((k = p.key) == key || (key != <span class="hljs-keyword">null</span> &amp;&amp; key.equals(k))))
+                e = p;
+            <span class="hljs-comment">// 【4】 如果第一个元素不是需要添加元素位置，则需再判断当前数组位置时链表还是红黑树</span>
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (p <span class="hljs-keyword">instanceof</span> TreeNode)
+                <span class="hljs-comment">// 如果为红黑树，则调用TreeNode自身的putTreeVal方法添加元素，返回元素所在的TreeNode</span>
+                e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(<span class="hljs-keyword">this</span>, tab, hash, key, value);
+            <span class="hljs-comment">// 【5】如果为链表</span>
+            <span class="hljs-keyword">else</span> {
+                <span class="hljs-comment">// 循环单向链表</span>
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> binCount = <span class="hljs-number">0</span>; ; ++binCount) {
+                    <span class="hljs-comment">// binCount为链表元素数量统计</span>
+                    <span class="hljs-comment">// 这里使用的时尾插法</span>
+                    <span class="hljs-keyword">if</span> ((e = p.next) == <span class="hljs-keyword">null</span>) {
+                        <span class="hljs-comment">// 当循环到链表尾部时，新建链表节点</span>
+                        p.next = newNode(hash, key, value, <span class="hljs-keyword">null</span>);
+                        <span class="hljs-comment">// 当链表元素超过树化阈值 （binCount从0开始，因此这里判断阈值-1）时</span>
+                        <span class="hljs-comment">// 将链表树化</span>
+                        <span class="hljs-keyword">if</span> (binCount &gt;= TREEIFY_THRESHOLD - <span class="hljs-number">1</span>) <span class="hljs-comment">// -1 for 1st</span>
+                            <span class="hljs-comment">// 树化方法中还会进一步判读table长度是否&gt;=64</span>
+                            <span class="hljs-comment">// 达到64才会树化，否则进行扩容操作</span>
+                            treeifyBin(tab, hash);
+                        <span class="hljs-keyword">break</span>;
+                    }
+                    <span class="hljs-comment">// 如果再链表循环中，找到一致的key，则返回节点，跳出循环</span>
+                    <span class="hljs-keyword">if</span> (e.hash == hash &amp;&amp;
+                        ((k = e.key) == key || (key != <span class="hljs-keyword">null</span> &amp;&amp; key.equals(k))))
+                        <span class="hljs-keyword">break</span>;
+                    p = e;
+                }
+            }
+            <span class="hljs-comment">// 【6】赋值</span>
+            <span class="hljs-keyword">if</span> (e != <span class="hljs-keyword">null</span>) { <span class="hljs-comment">// existing mapping for key</span>
+                V oldValue = e.value;
+                <span class="hljs-keyword">if</span> (!onlyIfAbsent || oldValue == <span class="hljs-keyword">null</span>)
+                    e.value = value;
+                <span class="hljs-comment">// 插入操作的callback方法， 方便LinkedHashMap做操作</span>
+                afterNodeAccess(e);
+                <span class="hljs-keyword">return</span> oldValue;
+            }
+        }
+        
+        <span class="hljs-comment">// 增加操作记录</span>
+        ++modCount;
+
+        <span class="hljs-comment">// 增加元素个数</span>
+        <span class="hljs-comment">// 判断是否达到扩容阈值，达到则进行扩容操作</span>
+        <span class="hljs-keyword">if</span> (++size &gt; threshold)
+            resize();
+        <span class="hljs-comment">// 插入操作的callback方法， 方便LinkedHashMap做操作</span>
+        afterNodeInsertion(evict);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    }
+</div></code></pre>
+
+    </body>
+    </html>

@@ -1,1 +1,0 @@
-# sosobad.github.io
