@@ -18,7 +18,7 @@ java虚拟机使用的KLT
 
 ### 线程池生命周期
 
-![pic]('../pic/threadpoollifecycle.png')
+![pic]('../../pic/threadpoollifecycle.png')
 
 + **RUNNING**: 接受新任务，同时也会执行队列中的任务
 + **SHUTDOWN**: 不接受新任务，但队列中的任务会继续执行
