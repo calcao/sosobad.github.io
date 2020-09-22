@@ -13,6 +13,7 @@
 java虚拟机使用的KLT
 
 ### 为什么要使用线程池
+线程的创建需要消耗资源
 
 
 
@@ -116,12 +117,13 @@ public void execute(Runnable command) {
             // 再次判断线程次运行状态
             if (! isRunning(recheck) && remove(command))
                 reject(command);
-            // 如果线程次线程为0，添加worker
+            // 如果线程为0，添加worker
             else if (workerCountOf(recheck) == 0)
                 addWorker(null, false);
         }
-        // 添加worker失败则拒绝
+        // 3. 添加任务进队列失败，尝试添加非核心线程处理任务
         else if (!addWorker(command, false))
+            // 填加非核心线程失败，则拒绝任务
             reject(command);
     }
 ```
