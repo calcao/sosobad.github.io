@@ -21,16 +21,15 @@ kubectl -n interface get secret interface-user-token-tk9c9 -o yaml
 
 
 + create config file
+
 ```bash
 # your server name goes here
 server=https://localhost:8443
 # the name of the secret containing the service account token goes here
 name=default-token-sg96k
-
 ca=$(kubectl get secret/$name -o jsonpath='{.data.ca\.crt}')
 token=$(kubectl get secret/$name -o jsonpath='{.data.token}' | base64 --decode)
 namespace=$(kubectl get secret/$name -o jsonpath='{.data.namespace}' | base64 --decode)
-
 echo "
 apiVersion: v1
 kind: Config
@@ -51,5 +50,4 @@ users:
   user:
     token: ${token}
 " > sa.kubeconfig
-
 ```
