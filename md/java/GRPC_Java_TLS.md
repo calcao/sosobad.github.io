@@ -34,6 +34,11 @@
     openssl pkcs8 -topk8 -nocrypt -in server.key -out server.pem
     ```
 
+    ```bash
+    openssl pkcs8 -topk8 -nocrypt -in client.key -outform DER -out client.der
+    openssl pkcs8 -topk8 -nocrypt -in server.key -outform DER -out server.der
+    ```
+
 
 
 ## Server端代码
