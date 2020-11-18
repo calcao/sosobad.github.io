@@ -1,46 +1,6 @@
 # GRPC-Java添加TLS双向认证
 
 
-
-## 生成证书
-
-+ 创建私钥
-    ```bash
-    openssl genrsa -out ca.key 4096
-    ```
-
-+ 创建CA证书
-    ```bash
-    openssl req -new -x509 -days 3650 -key ca.key -out ca.crt -subj "/C=CN/ST=Shanghai/L=Shanghai/O=Honeywell/OU=Ess/CN=localhost"
-    ```
-
-+ 生成服务端私钥证书
-    ```bash
-    openssl genrsa -out server.key 4096
-    openssl req -new -key server.key -out server.csr -subj "/C=CN/ST=Shanghai/L=Shanghai/O=Honeywell/OU=Ess/CN=localhost"
-    openssl x509 -req -days 3650 -in server.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out server.crt
-    ```
-
-+ 生成客户端证书
-    ```bash
-    openssl genrsa -out client.key 4096
-    openssl req -new -key client.key -out client.csr -subj "/C=CN/ST=Shanghai/L=Shanghai/O=Honeywell/OU=Ess/CN=localhost"
-    openssl x509 -req -days 3650 -in client.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out client.crt
-    ```
-
-+ 转换pkcs8格式
-    ```bash
-    openssl pkcs8 -topk8 -nocrypt -in client.key -out client.pem
-    openssl pkcs8 -topk8 -nocrypt -in server.key -out server.pem
-    ```
-
-    ```bash
-    openssl pkcs8 -topk8 -nocrypt -in client.key -outform DER -out client.der
-    openssl pkcs8 -topk8 -nocrypt -in server.key -outform DER -out server.der
-    ```
-
-
-
 ## Server端代码
 ```java
         try {

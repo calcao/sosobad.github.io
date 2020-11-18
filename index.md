@@ -32,5 +32,4 @@
 
 ## Other
 + [树莓派配置wifi](./md/other/raspnerry_network_config.md)
-
-
++ [Ubuntu添加开机启动](./md/other/ubuntu_start_on_boot.md)
