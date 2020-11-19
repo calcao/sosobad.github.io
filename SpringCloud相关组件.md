@@ -1,9 +1,9 @@
 # Spring Cloud
-![pic](../../pic/SpringCloud1.png)
+![pic](./pic/SpringCloud1.png)
 
 --------------
 ## Eureka
-![eureka](../../pic/eureka.png)
+![eureka](./pic/eureka.png)
 
 #### 自我保机制
 Eureka Server运行期间会会统计15分钟内心跳低于85%的服务实例，Eureka Server会将这些服务保护起来防止其过期，但是如果此时正好服务下线，会导致客户端获取到已经失效实例，所以需要客户端有一定容错机制，如重试、短路器等。
