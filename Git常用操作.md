@@ -13,6 +13,19 @@
     git push --mirror 新地址
     ```
 
+### 取消追踪
+
+```bash
+git rm -r --cached file
+```
+
+
+### 丢弃本地修改
+
+```bash
+git checkout .
+```
+
 ### git tag
 
 1. 添加tag
@@ -35,3 +48,11 @@
     git push origin v0.1.2 # 将v0.1.2标签提交到git服务器
     git push origin –tags # 将本地所有标签一次性提交到git服务器
     ```
+
+5. 删除远端tag
+   ```bash
+    git tag -d v0.1.1
+
+    git push origin :refs/tags/v0.1.1
+
+   ```
